@@ -4,12 +4,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/test.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Electron Main",
             "stopOnEntry": true,
             "sourceMaps": true,
@@ -18,8 +12,9 @@
                 "--nolazy"
             ],
             "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/main.js",
-            "protocol": "auto"
+            "program": "${workspaceRoot}/src/main.js",
+            "protocol": "inspector",
+            "restart": true
         }
     ]
 }

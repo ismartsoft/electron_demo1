@@ -1,5 +1,10 @@
-node_modules
+##
+node_modules/*
 dist
-
 lib
-*.js.map
+.sass-cache/*
+
+##
+*.css
+*.map
+src/**/*.js

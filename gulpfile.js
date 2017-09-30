@@ -1,37 +1,28 @@
 var gulp = require('gulp');
-var ts = require('gulp-typescript');
+var tsc = require('gulp-typescript');
 var sourcemaps = require("gulp-sourcemaps");
 var nodemon = require('gulp-nodemon');
 var clean = require('gulp-clean');
+var scss = require('gulp-scss');
+var watch = require('gulp-watch');
 var child_process = require('child_process');
 var electron = require('electron');
 
-var tsProject = ts.createProject('tsconfig.json');
+var tscProject = tsc.createProject('tsconfig.json');
 
 gulp.task('clean', () => {
-    return gulp.src('dist')
-    .pipe(clean());
+    /*return gulp.src('dist')
+        .pipe(clean());*/
 });
 
 gulp.task('compile', () => {
-    tsProject.src()
-    .pipe(sourcemaps.init())
-    .pipe(tsProject())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('copy', () => {
-    gulp.src('app/index.html')
-    .pipe(gulp.dest('dist/app'));
-});
-
-gulp.task('dist', function(){
-    gulp.watch('app/index.html', ['copy']);
+    gulp.src('src/**/*.ts')
+        .pipe(tscProject())
+        .pipe(gulp.dest('src'));
 });
 
 gulp.task('main', ['compile'], () => {
-    gulp.start(['dist']);
+    gulp.watch('src/**/*.ts', ['compile']);
 });
 
 // default tasks
