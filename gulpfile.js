@@ -17,7 +17,9 @@ gulp.task('clean', () => {
 
 gulp.task('compile', () => {
     gulp.src('src/**/*.ts')
+        .pipe(sourcemaps.init())
         .pipe(tscProject())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('src'));
 });
 

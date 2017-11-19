@@ -9,14 +9,14 @@ const path = require('path');
 const url = require('url');
 
 let mainWindow;
-   
+    
 // 
 var template = [{
     label: 'File',
     click: () => {
         console.log('关闭');
     },
-    submenu: [{
+    submenu: [{ 
         label: 'Undo',
         accelerator: 'CmdOrCtrl+Z',
         role: 'undo'
@@ -64,13 +64,12 @@ app.on('ready', () => {
     createWindow();
     //
 });
-/*
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
-        app.quit()
     }
 });
 
@@ -81,7 +80,7 @@ app.on('activate', () => {
         createWindow();
     }
 });
-*/
+ 
 //
 ipcMain.on('hello2', (event: string, arg: string) => {
     console.log('Hello, ', arg);

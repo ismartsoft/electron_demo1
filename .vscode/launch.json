@@ -8,13 +8,8 @@
             "stopOnEntry": true,
             "sourceMaps": true,
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
-            "runtimeArgs": [
-                "--nolazy"
-            ],
-            "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/src/main.js",
-            "protocol": "inspector",
-            "restart": true
+            "protocol": "auto",
+            "program": "${workspaceRoot}/src/main.js"
         }
     ]
 }
