@@ -1,14 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
             "name": "Electron Main",
-            "stopOnEntry": true,
-            "sourceMaps": true,
+            //"stopOnEntry": false,
+            //"sourceMaps": true,
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
-            "protocol": "auto",
+            "protocol": "inspector",
             "program": "${workspaceRoot}/src/main.js"
         }
     ]

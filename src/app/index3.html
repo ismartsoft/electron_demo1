@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../../lib/ol/ol.css" type="text/css">
+    <style>
+        html,
+        body {
+            margin: 0px;
+            height: 100%;
+            background: "#666"
+        }
+        .map {
+            width: 100%;
+            height: 100%;
+            margin: 0px auto;
+        }
+        .mouse-position-wrapper{
+            width:300px; 
+            height:29px; 
+            color:#0028aa; 
+            position:absolute; 
+            right:20px; 
+            bottom:6px; 
+            z-index:999;
+        }
+        /* rewrite the default css in `ol.css` */
+        .ol-rotate{
+            right:40px;
+        }
+        /* rewrite the default css in `ol.css` */
+        .ol-scale-line {
+            left:100px;
+        }
+        .ol-zoomslider{
+            top:110px;
+            left: 8px;
+        }
+    </style>
+    <script src="../../lib/ol/ol.js" type="text/javascript"></script>
+    <title>OpenLayers example</title>
+</head>
+
+<body>
+    <div id="map" class="map"></div>
+    <div id="mouse-position" class="mouse-position-wrapper">
+        <div class="custom-mouse-position"></div>
+    </div>
+    <script type="text/javascript">
+
+        function zeroPad(num, len, radix) {
+			var str = num.toString(radix || 10);
+			while (str.length < len) {
+				str = '0' + str;
+			}
+			return str.toUpperCase();
+        }
+
+         // 自定义分辨率和瓦片坐标系  
+        var resolutions = [];  
+        var maxZoom = 18;  
+
+        var deltaLon= 42.030289, deltaLat = 9.177073;
+    
+        // 计算百度使用的分辨率  
+        for (var i = 0; i <= maxZoom; i++) {  
+            resolutions[i] = Math.pow(2, maxZoom - i);  
+        }  
+        var tilegrid = new ol.tilegrid.TileGrid({  
+            origin: [0, 0],
+            resolutions: resolutions    // 设置分辨率  
+        }); 
+        
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    //source: new ol.source.OSM()
+                    origin: [deltaLon, deltaLat],
+                    source: new ol.source.XYZ({
+                        origin: [deltaLon, deltaLat],
+                        //minZoom: 1,
+                        //tileGrid: tilegrid,  
+                        // 设置本地离线瓦片所在路径，由于例子里面只有一张瓦片，页面显示时就只看得到一张瓦片。
+                        //url: 'maps/puzhehei/tiles/{z}/{x}/{y}.jpg',
+                        tileUrlFunction: function (coord) {
+                            var x = 'C' + zeroPad(coord[1], 8, 16);
+                            var y = 'R' + zeroPad(-coord[2] - 1, 8, 16);
+                            var z = 'L' + zeroPad(coord[0], 2, 10);
+                            var source = 'maps/arcgis/1/_alllayers/'
+                                + z + '/' + y + '/' + x + '.jpg';
+                            console.log(source);
+                            return source;
+                            /*
+                            var z = coord[0];
+                            var x = coord[1];
+                            var y = coord[2];
+                            // 百度瓦片服务url将负数使用M前缀来标识  
+                            if (x < 0) {  
+                                x = -x;  
+                            }  
+                            if (y < 0) {
+                                y = -y;  
+                            }
+                            return 'maps/baidu/tiles/'
+                                + z + '/' + x + '/' + y + '.jpg';*///
+                        }//,
+                        //projection: 'EPSG:4326'
+                    })
+                })
+            ],
+            view: new ol.View({
+                //center: ol.proj.transform([62.305771, 14.243477], 'EPSG:4326', 'EPSG:3857'), 
+                //center: ol.proj.fromLonLat([104.33606, 23.42055]),
+                //center: ol.proj.fromLonLat([104.06, 30.67]),
+                //center: ol.proj.fromLonLat([104.33606 - deltaLon, 23.42055 - deltaLat]),
+                center: ol.proj.fromLonLat([104.3282, 23.5564]),
+                zoom: 13,
+                maxZoom: 18,
+                minZoom: 13
+            }),
+            controls: ol.control.defaults().extend([
+                new ol.control.FullScreen(),
+                new ol.control.MousePosition({
+                    coordinateFormat: ol.coordinate.createStringXY(4),
+                    projection: 'EPSG:4326',
+                    className: 'custom-mouse-position',
+                    target: document.getElementById('mouse-position')
+                }),
+                new ol.control.OverviewMap({}),
+                new ol.control.Rotate({ 
+                    autoHide:false
+                }),
+                new ol.control.ScaleLine({  }),
+                new ol.control.ZoomSlider({  }),
+                new ol.control.ZoomToExtent({  })
+            ]),
+        });
+    </script>
+    
+</body>
+
+</html>

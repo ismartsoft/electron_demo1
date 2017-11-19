@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "demo1"
+    "url": "http://www.baidu.com"
   },
   "keywords": [
     "1234"
@@ -16,37 +16,19 @@
   "author": "iclosure",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^1.4.4",
-    "@types/node": "^8.0.31",
+    "@angular/cli": "^1.5.2",
     "bower": "^1.8.2",
-    "electron": "^1.7.8",
+    "child_process": "^1.0.2",
+    "electron": "^1.7.9",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^3.3.0",
-    "gulp-jshint": "^2.0.4",
-    "gulp-less": "^3.3.2",
-    "gulp-livereload": "^3.8.1",
-    "gulp-minify-css": "^1.2.4",
-    "gulp-minify-html": "^1.0.6",
     "gulp-nodemon": "^2.2.1",
-    "gulp-notify": "^3.0.0",
-    "gulp-rename": "^1.2.2",
     "gulp-scss": "^1.4.0",
     "gulp-sourcemaps": "^2.6.1",
-    "gulp-typescript": "^3.2.2",
-    "gulp-uglify": "^3.0.0",
+    "gulp-typescript": "^3.2.3",
     "gulp-watch": "^4.3.11",
-    "jshint": "^2.9.5",
-    "minimatch": "^3.0.2",
-    "node-gyp": "^3.6.2",
-    "types": "^0.1.1",
-    "typescript": "^2.5.3"
-  },
-  "dependencies": {
-    "@types/react": "^16.0.7",
-    "@types/typescript": "^2.0.0",
-    "cnpm": "^5.1.1",
-    "tsd": "^0.6.5"
+    "ol": "^4.5.0",
+    "typescript": "^2.6.1",
+    "vue": "^2.5.6"
   }
 }

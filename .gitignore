@@ -8,3 +8,6 @@ lib
 *.css
 *.map
 src/**/*.js
+
+##
+src/app/maps
